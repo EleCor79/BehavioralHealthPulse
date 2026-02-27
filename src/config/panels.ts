@@ -98,6 +98,9 @@ const FULL_MAP_LAYERS: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 const FULL_MOBILE_MAP_LAYERS: MapLayers = {
@@ -146,6 +149,9 @@ const FULL_MOBILE_MAP_LAYERS: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 // ============================================
@@ -234,6 +240,9 @@ const TECH_MAP_LAYERS: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 const TECH_MOBILE_MAP_LAYERS: MapLayers = {
@@ -282,6 +291,9 @@ const TECH_MOBILE_MAP_LAYERS: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 // ============================================
@@ -367,6 +379,9 @@ const FINANCE_MAP_LAYERS: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: true,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 const FINANCE_MOBILE_MAP_LAYERS: MapLayers = {
@@ -415,6 +430,9 @@ const FINANCE_MOBILE_MAP_LAYERS: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 // ============================================
@@ -479,6 +497,9 @@ const HAPPY_MAP_LAYERS: MapLayers = {
   speciesRecovery: true,
   renewableInstallations: true,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 const HAPPY_MOBILE_MAP_LAYERS: MapLayers = {
@@ -527,6 +548,9 @@ const HAPPY_MOBILE_MAP_LAYERS: MapLayers = {
   speciesRecovery: true,
   renewableInstallations: true,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 // ============================================
@@ -542,6 +566,7 @@ const HEALTH_PANELS: Record<string, PanelConfig> = {
   'ema-europa': { name: 'EMA - Agenzia Europea Medicinali', enabled: true, priority: 2 },
   'ecdc-sorveglianza': { name: 'ECDC - Sorveglianza EU', enabled: true, priority: 2 },
   europe: { name: 'Europa', enabled: true, priority: 2 },
+  'rare-diseases': { name: 'Malattie Rare', enabled: false, priority: 3 },
   monitors: { name: 'I Miei Monitor', enabled: true, priority: 2 },
 };
 
@@ -587,6 +612,10 @@ const HEALTH_MAP_LAYERS: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  // Health-specific
+  hospitals: true,
+  whoOutbreaks: true,
+  vaccinationCoverage: false,
 };
 
 const HEALTH_MOBILE_MAP_LAYERS: MapLayers = {
@@ -631,6 +660,10 @@ const HEALTH_MOBILE_MAP_LAYERS: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  // Health-specific
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 // ============================================
