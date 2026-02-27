@@ -355,7 +355,13 @@ export class MapComponent {
     const happyLayers: (keyof MapLayers)[] = [
       'positiveEvents', 'kindness', 'happiness', 'speciesRecovery', 'renewableInstallations',
     ];
-    const layers = SITE_VARIANT === 'tech' ? techLayers : SITE_VARIANT === 'finance' ? financeLayers : SITE_VARIANT === 'happy' ? happyLayers : fullLayers;
+    const healthLayers: (keyof MapLayers)[] = [
+      'natural', 'weather',                               // eventi naturali + allerte meteo
+      'fires',                                            // incendi (rischio salute pubblica)
+      'displacement',                                     // flussi migratori/sfollamento (sanità pubblica)
+      'climate',                                          // anomalie climatiche (salute ambientale)
+    ];
+    const layers = SITE_VARIANT === 'health' ? healthLayers : SITE_VARIANT === 'tech' ? techLayers : SITE_VARIANT === 'finance' ? financeLayers : SITE_VARIANT === 'happy' ? happyLayers : fullLayers;
     const layerLabelKeys: Partial<Record<keyof MapLayers, string>> = {
       hotspots: 'components.deckgl.layers.intelHotspots',
       conflicts: 'components.deckgl.layers.conflictZones',
@@ -383,6 +389,9 @@ export class MapComponent {
       centralBanks: 'components.deckgl.layers.centralBanks',
       commodityHubs: 'components.deckgl.layers.commodityHubs',
       gulfInvestments: 'components.deckgl.layers.gulfInvestments',
+      fires: 'components.deckgl.layers.fires',
+      displacement: 'components.deckgl.layers.displacementFlows',
+      climate: 'components.deckgl.layers.climateAnomalies',
     };
     const getLayerLabel = (layer: keyof MapLayers): string => {
       if (layer === 'sanctions') return t('components.deckgl.layerHelp.labels.sanctions');

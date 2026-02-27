@@ -12,6 +12,7 @@
     "dev:tech": "VITE_VARIANT=tech vite",
     "dev:finance": "VITE_VARIANT=finance vite",
     "dev:happy": "VITE_VARIANT=happy vite",
+    "dev:health": "VITE_VARIANT=health vite",
     "build": "tsc && vite build",
     "build:sidecar-sebuf": "node scripts/build-sidecar-sebuf.mjs",
     "build:desktop": "node scripts/build-sidecar-sebuf.mjs && tsc && vite build",

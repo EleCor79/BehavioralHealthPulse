@@ -530,11 +530,115 @@ const HAPPY_MOBILE_MAP_LAYERS: MapLayers = {
 };
 
 // ============================================
+// HEALTH VARIANT (Health Monitor Italia/Europa)
+// ============================================
+const HEALTH_PANELS: Record<string, PanelConfig> = {
+  map: { name: 'Mappa Sanità Italia', enabled: true, priority: 1 },
+  'live-news': { name: 'Notizie Salute', enabled: true, priority: 1 },
+  'ministero-salute': { name: 'Ministero della Salute', enabled: true, priority: 1 },
+  'iss-epicentro': { name: 'ISS Epicentro', enabled: true, priority: 1 },
+  'aifa-tracker': { name: 'AIFA - Farmaci & Autorizzazioni', enabled: true, priority: 1 },
+  'agenas-ospedali': { name: 'AGENAS - Pronto Soccorso', enabled: true, priority: 1 },
+  'ema-europa': { name: 'EMA - Agenzia Europea Medicinali', enabled: true, priority: 2 },
+  'ecdc-sorveglianza': { name: 'ECDC - Sorveglianza EU', enabled: true, priority: 2 },
+  europe: { name: 'Europa', enabled: true, priority: 2 },
+  monitors: { name: 'I Miei Monitor', enabled: true, priority: 2 },
+};
+
+const HEALTH_MAP_LAYERS: MapLayers = {
+  conflicts: false,
+  bases: false,
+  cables: false,
+  pipelines: false,
+  hotspots: false,
+  ais: false,
+  nuclear: false,
+  irradiators: false,
+  sanctions: false,
+  weather: true,
+  economic: false,
+  waterways: false,
+  outages: false,
+  cyberThreats: false,
+  datacenters: false,
+  protests: false,
+  flights: false,
+  military: false,
+  natural: true,
+  spaceports: false,
+  minerals: false,
+  fires: true,
+  ucdpEvents: false,
+  displacement: true,
+  climate: true,
+  startupHubs: false,
+  cloudRegions: false,
+  accelerators: false,
+  techHQs: false,
+  techEvents: false,
+  stockExchanges: false,
+  financialCenters: false,
+  centralBanks: false,
+  commodityHubs: false,
+  gulfInvestments: false,
+  positiveEvents: false,
+  kindness: false,
+  happiness: false,
+  speciesRecovery: false,
+  renewableInstallations: false,
+  tradeRoutes: false,
+};
+
+const HEALTH_MOBILE_MAP_LAYERS: MapLayers = {
+  conflicts: false,
+  bases: false,
+  cables: false,
+  pipelines: false,
+  hotspots: false,
+  ais: false,
+  nuclear: false,
+  irradiators: false,
+  sanctions: false,
+  weather: true,
+  economic: false,
+  waterways: false,
+  outages: false,
+  cyberThreats: false,
+  datacenters: false,
+  protests: false,
+  flights: false,
+  military: false,
+  natural: true,
+  spaceports: false,
+  minerals: false,
+  fires: false,
+  ucdpEvents: false,
+  displacement: false,
+  climate: false,
+  startupHubs: false,
+  cloudRegions: false,
+  accelerators: false,
+  techHQs: false,
+  techEvents: false,
+  stockExchanges: false,
+  financialCenters: false,
+  centralBanks: false,
+  commodityHubs: false,
+  gulfInvestments: false,
+  positiveEvents: false,
+  kindness: false,
+  happiness: false,
+  speciesRecovery: false,
+  renewableInstallations: false,
+  tradeRoutes: false,
+};
+
+// ============================================
 // VARIANT-AWARE EXPORTS
 // ============================================
-export const DEFAULT_PANELS = SITE_VARIANT === 'happy' ? HAPPY_PANELS : SITE_VARIANT === 'tech' ? TECH_PANELS : SITE_VARIANT === 'finance' ? FINANCE_PANELS : FULL_PANELS;
-export const DEFAULT_MAP_LAYERS = SITE_VARIANT === 'happy' ? HAPPY_MAP_LAYERS : SITE_VARIANT === 'tech' ? TECH_MAP_LAYERS : SITE_VARIANT === 'finance' ? FINANCE_MAP_LAYERS : FULL_MAP_LAYERS;
-export const MOBILE_DEFAULT_MAP_LAYERS = SITE_VARIANT === 'happy' ? HAPPY_MOBILE_MAP_LAYERS : SITE_VARIANT === 'tech' ? TECH_MOBILE_MAP_LAYERS : SITE_VARIANT === 'finance' ? FINANCE_MOBILE_MAP_LAYERS : FULL_MOBILE_MAP_LAYERS;
+export const DEFAULT_PANELS = SITE_VARIANT === 'health' ? HEALTH_PANELS : SITE_VARIANT === 'happy' ? HAPPY_PANELS : SITE_VARIANT === 'tech' ? TECH_PANELS : SITE_VARIANT === 'finance' ? FINANCE_PANELS : FULL_PANELS;
+export const DEFAULT_MAP_LAYERS = SITE_VARIANT === 'health' ? HEALTH_MAP_LAYERS : SITE_VARIANT === 'happy' ? HAPPY_MAP_LAYERS : SITE_VARIANT === 'tech' ? TECH_MAP_LAYERS : SITE_VARIANT === 'finance' ? FINANCE_MAP_LAYERS : FULL_MAP_LAYERS;
+export const MOBILE_DEFAULT_MAP_LAYERS = SITE_VARIANT === 'health' ? HEALTH_MOBILE_MAP_LAYERS : SITE_VARIANT === 'happy' ? HAPPY_MOBILE_MAP_LAYERS : SITE_VARIANT === 'tech' ? TECH_MOBILE_MAP_LAYERS : SITE_VARIANT === 'finance' ? FINANCE_MOBILE_MAP_LAYERS : FULL_MOBILE_MAP_LAYERS;
 
 /** Maps map-layer toggle keys to their data-freshness source IDs (single source of truth). */
 export const LAYER_TO_SOURCE: Partial<Record<keyof MapLayers, DataSourceId[]>> = {

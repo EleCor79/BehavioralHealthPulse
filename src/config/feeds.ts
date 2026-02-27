@@ -1020,8 +1020,56 @@ const HAPPY_FEEDS: Record<string, Feed[]> = {
   ],
 };
 
+const HEALTH_FEEDS: Record<string, Feed[]> = {
+  // Notizie salute italiane
+  'live-news': [
+    { name: 'Salute Italia', url: rss('https://news.google.com/rss/search?q=salute+sanita+italia+when:2d&hl=it-IT&gl=IT&ceid=IT:it') },
+    { name: 'ANSA Salute', url: rss('https://www.ansa.it/sito/notizie/salute_e_benessere/salute_e_benessere_rss.xml') },
+    { name: 'Repubblica Salute', url: rss('https://www.repubblica.it/rss/salute/rss2.0.xml') },
+    { name: 'Corriere Salute', url: rss('https://www.corriere.it/rss/salute.xml') },
+  ],
+  // Ministero della Salute
+  'ministero-salute': [
+    { name: 'Ministero della Salute', url: rss('https://www.salute.gov.it/portale/rss.jsp') },
+    { name: 'Salute Gov News', url: rss('https://news.google.com/rss/search?q=ministero+salute+italia+when:7d&hl=it-IT&gl=IT&ceid=IT:it') },
+  ],
+  // ISS Epicentro
+  'iss-epicentro': [
+    { name: 'ISS Epicentro', url: rss('https://www.epicentro.iss.it/coronavirus/rss') },
+    { name: 'ISS Notizie', url: rss('https://news.google.com/rss/search?q=istituto+superiore+sanita+ISS+when:7d&hl=it-IT&gl=IT&ceid=IT:it') },
+  ],
+  // AIFA
+  'aifa-tracker': [
+    { name: 'AIFA Notizie', url: rss('https://www.aifa.gov.it/rss-notizie.xml') },
+    { name: 'AIFA Comunicati', url: rss('https://news.google.com/rss/search?q=AIFA+farmaco+approvazione+OR+ritiro+when:14d&hl=it-IT&gl=IT&ceid=IT:it') },
+  ],
+  // AGENAS Ospedali
+  'agenas-ospedali': [
+    { name: 'AGENAS PNRR', url: rss('https://www.pnrrsalute.gov.it/portale/rss/dati.xml') },
+    { name: 'Pronto Soccorso IT', url: rss('https://news.google.com/rss/search?q=pronto+soccorso+ospedali+italia+when:3d&hl=it-IT&gl=IT&ceid=IT:it') },
+    { name: 'SSN Notizie', url: rss('https://news.google.com/rss/search?q="servizio+sanitario+nazionale"+OR+SSN+when:7d&hl=it-IT&gl=IT&ceid=IT:it') },
+  ],
+  // EMA
+  'ema-europa': [
+    { name: 'EMA News', url: rss('https://www.ema.europa.eu/en/rss.xml') },
+    { name: 'EMA Drug Approvals', url: rss('https://news.google.com/rss/search?q=EMA+"European+Medicines+Agency"+approval+when:14d&hl=en-US&gl=US&ceid=US:en') },
+  ],
+  // ECDC
+  'ecdc-sorveglianza': [
+    { name: 'ECDC Threats', url: rss('https://www.ecdc.europa.eu/en/rss.xml') },
+    { name: 'ECDC Surveillance', url: rss('https://news.google.com/rss/search?q=ECDC+disease+surveillance+europe+when:7d&hl=en-US&gl=US&ceid=US:en') },
+  ],
+  // Europa salute
+  europe: [
+    { name: 'EU Health Policy', url: rss('https://news.google.com/rss/search?q=EU+health+policy+europe+when:7d&hl=en-US&gl=US&ceid=US:en') },
+    { name: 'WHO Europe', url: rss('https://news.google.com/rss/search?q=WHO+Europe+health+when:7d&hl=en-US&gl=US&ceid=US:en') },
+  ],
+};
+
 // Variant-aware exports
-export const FEEDS = SITE_VARIANT === 'tech'
+export const FEEDS = SITE_VARIANT === 'health'
+  ? HEALTH_FEEDS
+  : SITE_VARIANT === 'tech'
   ? TECH_FEEDS
   : SITE_VARIANT === 'finance'
     ? FINANCE_FEEDS

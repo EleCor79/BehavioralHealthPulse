@@ -67,6 +67,20 @@ const FULL_LIVE_CHANNELS: LiveChannel[] = [
   { id: 'aljazeera', name: 'AlJazeera', handle: '@AlJazeeraEnglish', fallbackVideoId: 'gCNeDWCI0vo', useFallbackOnly: true },
 ];
 
+// Health variant: Canali sanitari italiani ed europei (tutti su YouTube)
+const HEALTH_LIVE_CHANNELS: LiveChannel[] = [
+  // 1. Euronews IT — sanità europea, epidemie H24
+  { id: 'euronews-it', name: 'Euronews IT', handle: '@EuronewsItaliano', fallbackVideoId: 'zOZNBpzOTqI', useFallbackOnly: false },
+  // 2. Rai News 24 — YouTube ufficiale (player RaiPlay non embeddabile)
+  { id: 'rai-news24', name: 'Rai News 24', handle: '@RaiNews', fallbackVideoId: 'BUdCBfhDfSA', useFallbackOnly: false },
+  // 3. TGCOM24 — YouTube Mediaset (player Mediaset non embeddabile)
+  { id: 'tgcom24', name: 'TGCOM24', handle: '@TGCOM24', fallbackVideoId: 'A9bqDABsVrs', useFallbackOnly: false },
+  // 4. Sky TG24 — YouTube ufficiale (NowTV non embeddabile)
+  { id: 'sky-tg24', name: 'Sky TG24', handle: '@SkyTG24', fallbackVideoId: 'mhpNm0YEpAo', useFallbackOnly: false },
+  // 5. Humanitas — contenuti medici YouTube (sito non embeddabile)
+  { id: 'humanitas', name: 'Humanitas Channel', handle: '@HumanitasResearchHospital', fallbackVideoId: '', useFallbackOnly: false },
+];
+
 // Tech variant: Tech & business channels
 const TECH_LIVE_CHANNELS: LiveChannel[] = [
   { id: 'bloomberg', name: 'Bloomberg', handle: '@Bloomberg', fallbackVideoId: 'iEpJwprxDdk' },
@@ -136,7 +150,7 @@ export const OPTIONAL_CHANNEL_REGIONS: { key: string; labelKey: string; channelI
   { key: 'africa', labelKey: 'components.liveNews.regionAfrica', channelIds: ['africanews', 'channels-tv', 'ktn-news', 'enca', 'sabc-news'] },
 ];
 
-const DEFAULT_LIVE_CHANNELS = SITE_VARIANT === 'tech' ? TECH_LIVE_CHANNELS : SITE_VARIANT === 'happy' ? [] : FULL_LIVE_CHANNELS;
+const DEFAULT_LIVE_CHANNELS = SITE_VARIANT === 'health' ? HEALTH_LIVE_CHANNELS : SITE_VARIANT === 'tech' ? TECH_LIVE_CHANNELS : SITE_VARIANT === 'happy' ? [] : FULL_LIVE_CHANNELS;
 
 /** Default channel list for the current variant (for restore in channel management). */
 export function getDefaultLiveChannels(): LiveChannel[] {

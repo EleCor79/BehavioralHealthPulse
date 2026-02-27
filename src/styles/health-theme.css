@@ -1,0 +1,354 @@
+/* ============================================================
+   Health Monitor Italia/Europa — BehavioralHealth Brand Theme
+   Blu medicale profondo + Verde speranza + Bianco clinico
+   Ispirato a: healthcare trust, SSN, istituzioni sanitarie IT
+   ============================================================ */
+
+/* ---------- Health Dark Mode (default) ---------- */
+:root[data-variant="health"],
+:root[data-variant="health"][data-theme="dark"] {
+  /* Backgrounds — blu notte medicale, non il nero militare */
+  --bg: #060d1a;
+  --bg-secondary: #0a1628;
+  --surface: #0e1e38;
+  --surface-hover: #142540;
+  --surface-active: #1a2e4a;
+
+  /* Borders — blu acciaio */
+  --border: #1e3a5f;
+  --border-strong: #2a5080;
+  --border-subtle: #122030;
+
+  /* Text — bianco clinico caldo */
+  --text: #e8f0f8;
+  --text-secondary: #b8cce0;
+  --text-dim: #7a9dbf;
+  --text-muted: #567090;
+  --text-faint: #3a5070;
+  --text-ghost: #28384a;
+  --accent: #4dd9ac;
+
+  /* Overlays & shadows */
+  --overlay-subtle: rgba(77, 217, 172, 0.03);
+  --overlay-light: rgba(77, 217, 172, 0.06);
+  --overlay-medium: rgba(77, 217, 172, 0.10);
+  --overlay-heavy: rgba(77, 217, 172, 0.18);
+  --shadow-color: rgba(0, 0, 0, 0.40);
+  --darken-light: rgba(0, 0, 0, 0.15);
+  --darken-medium: rgba(0, 0, 0, 0.25);
+  --darken-heavy: rgba(0, 0, 0, 0.40);
+
+  /* Scrollbar */
+  --scrollbar-thumb: #1e3a5f;
+  --scrollbar-thumb-hover: #2a5080;
+
+  /* Input */
+  --input-bg: #0e1e38;
+
+  /* Panels — blu medicale profondo */
+  --panel-bg: #0e1e38;
+  --panel-border: #1e3a5f;
+
+  /* Map — colori sanità (verde → azzurro Italia/EU) */
+  --map-bg: #040c18;
+  --map-grid: #0a1e30;
+  --map-country: #0a1828;
+  --map-stroke: #1a4a6a;
+
+  /* Font — più leggibile per dati medici */
+  --font-body: 'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif;
+
+  /* Panel radius — leggermente arrotondato (fiducia/cura) */
+  --panel-radius: 8px;
+
+  /* =================================================
+     Severity — rimappati a contesto sanitario
+     Critico = urgenza → arancio/rosso
+     Alto    = allerta  → giallo ambra
+     Normale = stabile  → verde speranza
+     Basso   = info     → azzurro SSN
+     ================================================= */
+  --semantic-critical: #ff5252;
+  --semantic-high: #ffab40;
+  --semantic-elevated: #fff176;
+  --semantic-normal: #4dd9ac;
+  --semantic-low: #40c4ff;
+  --semantic-info: #82b1ff;
+  --semantic-positive: #4dd9ac;
+
+  --threat-critical: #ff5252;
+  --threat-high: #ffab40;
+  --threat-medium: #fff176;
+  --threat-low: #4dd9ac;
+  --threat-info: #40c4ff;
+
+  /* DEFCON → livelli sanitari
+     1 = Emergenza sanitaria nazionale
+     2 = Allerta alta
+     3 = Monitoraggio attivo
+     4 = Situazione stabile
+     5 = Normalità */
+  --defcon-1: #ff5252;
+  --defcon-2: #ffab40;
+  --defcon-3: #fff176;
+  --defcon-4: #40c4ff;
+  --defcon-5: #4dd9ac;
+
+  /* Status indicators — verde salute per "live" */
+  --status-live: #4dd9ac;
+  --status-cached: #ffab40;
+  --status-unavailable: #ff5252;
+
+  /* Legacy aliases */
+  --red: #ff5252;
+  --green: #4dd9ac;
+  --yellow: #ffab40;
+}
+
+/* ---------- Health Light Mode ---------- */
+:root[data-variant="health"][data-theme="light"] {
+  /* Backgrounds — bianco clinico */
+  --bg: #f0f6ff;
+  --bg-secondary: #e6f0fa;
+  --surface: #ffffff;
+  --surface-hover: #e8f4fd;
+  --surface-active: #d6ecf8;
+
+  /* Borders */
+  --border: #b8d4e8;
+  --border-strong: #7aaac8;
+  --border-subtle: #dceef8;
+
+  /* Text — blu istituzionale */
+  --text: #0d2b45;
+  --text-secondary: #1a4a6a;
+  --text-dim: #4a7090;
+  --text-muted: #6a90a8;
+  --text-faint: #90b0c0;
+  --text-ghost: #b8ccd8;
+  --accent: #0077b6;
+
+  /* Overlays */
+  --overlay-subtle: rgba(0, 119, 182, 0.03);
+  --overlay-light: rgba(0, 119, 182, 0.05);
+  --overlay-medium: rgba(0, 119, 182, 0.08);
+  --overlay-heavy: rgba(0, 119, 182, 0.12);
+  --shadow-color: rgba(0, 60, 120, 0.08);
+
+  /* Input */
+  --input-bg: #f0f6ff;
+
+  /* Panels */
+  --panel-bg: #ffffff;
+  --panel-border: #b8d4e8;
+
+  /* Map — azzurro Italia EU */
+  --map-bg: #d4e8f5;
+  --map-grid: #b8d4e8;
+  --map-country: #c8dff0;
+  --map-stroke: #90b8d0;
+
+  /* Semantic — light mode */
+  --semantic-critical: #d32f2f;
+  --semantic-high: #e65100;
+  --semantic-elevated: #f57f17;
+  --semantic-normal: #00897b;
+  --semantic-low: #0277bd;
+  --semantic-info: #1565c0;
+  --semantic-positive: #00897b;
+
+  --defcon-1: #d32f2f;
+  --defcon-2: #e65100;
+  --defcon-3: #f57f17;
+  --defcon-4: #0277bd;
+  --defcon-5: #00897b;
+
+  --status-live: #00897b;
+  --status-cached: #e65100;
+  --status-unavailable: #d32f2f;
+
+  --red: #d32f2f;
+  --green: #00897b;
+  --yellow: #f57f17;
+}
+
+/* ==========================================================
+   Health Panel Chrome — Pulito, professionale, istituzionale
+   ========================================================== */
+
+[data-variant="health"] .panel {
+  border-radius: var(--panel-radius, 8px);
+  border-left: 2px solid var(--green);
+  overflow: hidden;
+}
+
+[data-variant="health"] .panel-header {
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(77, 217, 172, 0.05) 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-variant="health"] .panel-title {
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+[data-variant="health"] .panel-count {
+  background: rgba(77, 217, 172, 0.15);
+  color: var(--green);
+  border-radius: 10px;
+  padding: 2px 7px;
+  font-size: 10px;
+}
+
+/* Status badge "IN DIRETTA" — verde salute */
+[data-variant="health"] .status-live,
+[data-variant="health"] .live-badge {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* Resize handle */
+[data-variant="health"] .panel-resize-handle {
+  background: linear-gradient(to top, rgba(77, 217, 172, 0.08), transparent);
+}
+
+/* Map section */
+[data-variant="health"] .map-section {
+  border-radius: var(--panel-radius, 8px);
+  overflow: hidden;
+}
+
+/* ==========================================================
+   Health Header — badge DEFCON → badge SSN
+   ========================================================== */
+
+/* Sostituisce i colori DEFCON militare con palette sanità */
+[data-variant="health"] .defcon-badge,
+[data-variant="health"] #defconBadge {
+  background: rgba(77, 217, 172, 0.15) !important;
+  color: var(--green) !important;
+  border-color: var(--green) !important;
+}
+
+/* ==========================================================
+   Health News Feed — tag categoria HEALTH evidenziato
+   ========================================================== */
+
+[data-variant="health"] .feed-tag-health,
+[data-variant="health"] .category-badge.health {
+  background: rgba(77, 217, 172, 0.20);
+  color: var(--green);
+  border: 1px solid rgba(77, 217, 172, 0.40);
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================
+   Health Loading / Radar — pulsazione cardiaca
+   ========================================================== */
+
+[data-variant="health"] .panel-loading-radar {
+  border-color: rgba(77, 217, 172, 0.25);
+}
+
+[data-variant="health"] .panel-radar-sweep {
+  background: linear-gradient(90deg, transparent, var(--green));
+  animation: health-pulse-sweep 2s ease-in-out infinite;
+}
+
+[data-variant="health"] .panel-radar-dot {
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  animation: health-heartbeat 1.2s ease-in-out infinite;
+}
+
+[data-variant="health"] .status-dot {
+  animation: health-heartbeat 1.8s ease-in-out infinite;
+}
+
+@keyframes health-heartbeat {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.15); }
+  70% { opacity: 0.7; transform: scale(0.9); }
+}
+
+@keyframes health-pulse-sweep {
+  0%   { opacity: 0.3; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* ==========================================================
+   Health Data Badges — pillole azzurre istituzionali
+   ========================================================== */
+
+[data-variant="health"] .panel-data-badge {
+  border-radius: 6px;
+  background: rgba(64, 196, 255, 0.12);
+  color: var(--semantic-low);
+  border: 1px solid rgba(64, 196, 255, 0.25);
+}
+
+/* ==========================================================
+   Health Error State
+   ========================================================== */
+
+[data-variant="health"] .panel-header-error {
+  background: rgba(255, 82, 82, 0.10);
+  border-bottom-color: rgba(255, 82, 82, 0.25);
+}
+
+/* ==========================================================
+   Health Empty State
+   ========================================================== */
+
+[data-variant="health"] .panel-empty,
+[data-variant="health"] .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  text-align: center;
+  color: var(--text-dim);
+  gap: 12px;
+  font-size: 13px;
+}
+
+/* ==========================================================
+   Health Tab Styles
+   ========================================================== */
+
+[data-variant="health"] .disp-tab-active,
+[data-variant="health"] .ucdp-tab-active {
+  background: rgba(77, 217, 172, 0.12);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+/* ==========================================================
+   Health Light Mode Panel overrides
+   ========================================================== */
+
+[data-variant="health"][data-theme="light"] .panel {
+  border-left-color: #00897b;
+  box-shadow: 0 1px 3px rgba(0, 60, 120, 0.07);
+}
+
+[data-variant="health"][data-theme="light"] .panel-title {
+  color: #0077b6;
+}
+
+[data-variant="health"][data-theme="light"] .panel-count {
+  background: rgba(0, 137, 123, 0.12);
+  color: #00897b;
+}
