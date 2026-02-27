@@ -1,0 +1,33 @@
+ID,Name,URL,Category,Country,Priority
+1,Ministero Salute IT,https://www.salute.gov.it/portale/rss.jsp,public-health,IT,1
+2,ISS Epicentro,https://www.epicentro.iss.it/rss,surveillance,IT,1
+3,ISS Notizie,https://www.iss.it/rss-notizie.xml,news,IT,1
+4,AGENAS RSS,https://www.agenas.gov.it/rss.xml,hospitals,IT,1
+5,AIFA Feed,https://www.aifa.gov.it/feed-rss,pharma,IT,1
+6,PZN Pronto Soccorso,https://www.pnrrsalute.gov.it/portale/rss/dati.xml,ps,IT,1
+7,ECDC RSS,https://www.ecdc.europa.eu/en/rss.xml,surveillance,EU,1
+8,EMA News,https://www.ema.europa.eu/en/rss-feeds,pharma,EU,1
+9,WHO Disease Outbreaks,https://www.who.int/rss-feeds/don.xml,outbreaks,Global,1
+10,ProMED Mail,https://promedmail.org/feed/,outbreaks,Global,1
+11,CDC FluView,https://www.cdc.gov/flu/weekly/FluViewRSS.xml,influenza,US,2
+12,FDA Drug Approvals,https://www.fda.gov/about-fda/newsroom/rss,pharma,US,2
+13,ISTAT Salute,https://www.istat.it/rss/salute.xml,stats,IT,2
+14,EURORDIS Rare Diseases,https://www.eurordis.org/rss.xml,rare-diseases,EU,2
+15,Orphanet Italia,https://www.orpha.net/it/rss/news,rare-diseases,IT,2
+16,Telethon News,https://www.telethon.it/rss/news,research,IT,2
+17,Epicentro Coronavirus,https://www.epicentro.iss.it/coronavirus/rss,covid,IT,1
+18,MinSalute News Specifiche,https://www.salute.gov.it/portale/rss/news.xml,news,IT,1
+19,AGENAS Pnrr Salute,https://www.pnrrsalute.gov.it/rss,funding,IT,2
+20,Regione Lombardia Salute,https://www.regione.lombardia.it/wps/portal/istituzionale/HP/rss-salute,regional,IT-Lombardia,2
+21,Lazio Open Data Salute,https://dati.lazio.it/rss/salute.xml,regional,IT-Lazio,2
+22,EMA Clinical Trials,https://clinicaltrials.eu/rss,trials,EU,2
+23,ECDC Weekly Threats,https://www.ecdc.europa.eu/en/rss-threats,threats,EU,1
+24,Sanitainformazione,https://www.sanitainformazione.it/rss,news,IT,3
+25,Pianeta Salute,https://pianetasalute.online/rss,news,IT,3
+26,Humanitas News,https://www.humanitas.it/news/rss,hospital,IT,3
+27,Borsaitaliana Health Index,https://www.borsaitaliana.it/rss/health,market,IT,3
+28,Investing Healthcare,https://it.investing.com/rss/healthcare_sector.rss,market,IT,3
+29,EIN Health Europe,https://health.einnews.com/rss/europe,news,EU,3
+30,Health Informatics Feeds,https://rss.feedspot.com/health_informatics_rss_feeds.xml,tech,Global,3
+31,EU Core Health Indicators,https://health.ec.europa.eu/rss/echi,indicators,EU,2
+32,GLOBSEC HRI Updates,https://globsec.org/rss/health,readiness,EU,2
