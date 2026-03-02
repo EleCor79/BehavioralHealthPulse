@@ -56,7 +56,7 @@ interface OverpassResponse {
 }
 
 const breaker = createCircuitBreaker<Hospital[]>({
-  name: 'OSM Hospitals IT',  // suffisso IT = nuova cache (bbox ridotto a Italia)
+  name: 'OSM Hospitals IT+EU v2',  // v2 = cache key nuova, invalida vecchio IT-only cache
   cacheTtlMs: 24 * 60 * 60 * 1000, // 24h — dati statici
   persistCache: true,
 });
