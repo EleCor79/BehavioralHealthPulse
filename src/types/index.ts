@@ -947,6 +947,8 @@ export interface Hospital {
   beds?: number;
   emergency: boolean;
   type: 'hospital' | 'clinic' | 'health_centre' | 'university';
+  hri?: number;       // Health Readiness Index 0–100 (fonte: GLOBSEC HRI / GHS Index)
+  specialty?: string; // Area clinica principale es. "Oncology & Research"
 }
 
 export interface WhoOutbreak {

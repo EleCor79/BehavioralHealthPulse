@@ -12,7 +12,7 @@ import {
   LAYER_TO_SOURCE,
 } from '@/config';
 import { INTEL_HOTSPOTS, CONFLICT_ZONES } from '@/config/geo';
-import { STATIC_HOSPITALS_IT } from '@/config/hospitals-static';
+import { STATIC_HOSPITALS_IT, STATIC_HOSPITALS_EU } from '@/config/hospitals-static';
 import {
   fetchCategoryFeeds,
   getFeedFailures,
@@ -151,9 +151,10 @@ export class DataLoaderManager implements AppModule {
     // Health variant: inietta subito gli ospedali statici come seed visivo immediato
     // Overpass li sovrascriverà con dati OSM completi quando disponibile
     if (SITE_VARIANT === 'health' && this.ctx.mapLayers.hospitals) {
-      this.ctx.map?.setHospitals(STATIC_HOSPITALS_IT);
+      const allStaticHospitals = [...STATIC_HOSPITALS_IT, ...STATIC_HOSPITALS_EU];
+      this.ctx.map?.setHospitals(allStaticHospitals);
       this.ctx.map?.setLayerReady('hospitals', true);
-      console.log(`[Health] Seeded ${STATIC_HOSPITALS_IT.length} static hospitals immediately`);
+      console.log(`[Health] Seeded ${STATIC_HOSPITALS_IT.length} IT + ${STATIC_HOSPITALS_EU.length} EU static hospitals immediately`);
     }
 
     const runGuarded = async (name: string, fn: () => Promise<void>): Promise<void> => {

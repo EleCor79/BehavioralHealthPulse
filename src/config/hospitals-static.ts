@@ -71,3 +71,103 @@ export const STATIC_HOSPITALS_IT: Hospital[] = [
   { id: 's-irccs-rizzoli', name: 'IRCCS Istituto Ortopedico Rizzoli', lat: 44.5109, lon: 11.3659, country: 'IT', city: 'Bologna', beds: 300, emergency: false, type: 'university' },
   { id: 's-ifo-regina-elena', name: 'IFO – Istituto Regina Elena Roma', lat: 41.8790, lon: 12.5188, country: 'IT', city: 'Roma', beds: 400, emergency: false, type: 'university' },
 ];
+
+/**
+ * Ospedali europei di eccellenza — seed statico
+ * Dati: ID, nome, città, paese, coordinate, HRI (Health Readiness Index), posti letto, specialità
+ * Fonte: GLOBSEC HRI / GHS Index / siti ufficiali ospedali
+ */
+export const STATIC_HOSPITALS_EU: Hospital[] = [
+  // === SVIZZERA ===
+  { id: 'chuv_lausanne',        name: 'CHUV Lausanne',                              city: 'Lausanne',    country: 'CH', lat: 46.5231, lon:  6.6323, hri: 82, beds: 1500, emergency: true,  type: 'university', specialty: 'General & Research' },
+  { id: 'chu_geneve',           name: 'HUG Geneva',                                 city: 'Geneva',      country: 'CH', lat: 46.1944, lon:  6.1432, hri: 80, beds: 1800, emergency: true,  type: 'university', specialty: 'General & Transplant' },
+  { id: 'insel_bern',           name: 'Inselspital Bern',                           city: 'Bern',        country: 'CH', lat: 46.9479, lon:  7.4346, hri: 85, beds:  900, emergency: true,  type: 'university', specialty: 'General & Neurology' },
+  { id: 'zurich_university_hosp', name: 'Universitätsspital Zürich',               city: 'Zurich',      country: 'CH', lat: 47.3762, lon:  8.5490, hri: 88, beds:  950, emergency: true,  type: 'university', specialty: 'General & Cardiology' },
+  { id: 'basel_university_hosp',  name: 'Universitätsspital Basel',                city: 'Basel',       country: 'CH', lat: 47.5599, lon:  7.5906, hri: 84, beds:  700, emergency: true,  type: 'university', specialty: 'Oncology & Research' },
+
+  // === GERMANIA ===
+  { id: 'charite_berlin',       name: 'Charité – Universitätsmedizin Berlin',       city: 'Berlin',      country: 'DE', lat: 52.5232, lon: 13.3789, hri: 88, beds: 3000, emergency: true,  type: 'university', specialty: 'General & Research' },
+  { id: 'ukb_bonn',             name: 'Universitätsklinikum Bonn',                  city: 'Bonn',        country: 'DE', lat: 50.7174, lon:  7.0845, hri: 81, beds: 1300, emergency: true,  type: 'university', specialty: 'General' },
+  { id: 'uk_frankfurt',         name: 'Universitätsklinikum Frankfurt',             city: 'Frankfurt',   country: 'DE', lat: 50.5619, lon:  8.6672, hri: 83, beds: 1400, emergency: true,  type: 'university', specialty: 'Cardiology' },
+  { id: 'uk_munich',            name: 'LMU Klinikum der Universität München',       city: 'Munich',      country: 'DE', lat: 48.1355, lon: 11.5820, hri: 86, beds: 2000, emergency: true,  type: 'university', specialty: 'Oncology' },
+  { id: 'munster_university_hosp', name: 'Universitätsklinikum Münster',            city: 'Münster',     country: 'DE', lat: 51.9630, lon:  7.6130, hri: 82, beds: 1500, emergency: true,  type: 'university', specialty: 'General' },
+  { id: 'hamburg_uke',          name: 'Universitätsklinikum Hamburg-Eppendorf',     city: 'Hamburg',     country: 'DE', lat: 53.5900, lon:  9.9730, hri: 86, beds: 1500, emergency: true,  type: 'university', specialty: 'General & Research' },
+
+  // === REGNO UNITO ===
+  { id: 'barts_london',         name: 'St Bartholomew\'s Hospital',                 city: 'London',      country: 'GB', lat: 51.5176, lon: -0.0981, hri: 85, beds:  800, emergency: true,  type: 'hospital',   specialty: 'Cardiology & Cancer' },
+  { id: 'uclh_london',          name: 'University College Hospital London',         city: 'London',      country: 'GB', lat: 51.5247, lon: -0.1371, hri: 84, beds:  900, emergency: true,  type: 'university', specialty: 'General & Teaching' },
+  { id: 'gosh_london',          name: 'Great Ormond Street Hospital',               city: 'London',      country: 'GB', lat: 51.5214, lon: -0.1205, hri: 89, beds:  600, emergency: true,  type: 'hospital',   specialty: 'Paediatrics' },
+  { id: 'royal_marsden',        name: 'The Royal Marsden Hospital',                 city: 'London',      country: 'GB', lat: 51.4870, lon: -0.1710, hri: 90, beds:  500, emergency: false, type: 'hospital',   specialty: 'Oncology' },
+
+  // === FRANCIA ===
+  { id: 'aph_paris',            name: 'AP-HP Pitié-Salpêtrière',                    city: 'Paris',       country: 'FR', lat: 48.8385, lon:  2.3612, hri: 87, beds: 1600, emergency: true,  type: 'university', specialty: 'Neurology & Cardiology' },
+  { id: 'cochin_paris',         name: 'Hôpital Cochin',                             city: 'Paris',       country: 'FR', lat: 48.8418, lon:  2.3350, hri: 82, beds: 1000, emergency: true,  type: 'hospital',   specialty: 'General & Endocrinology' },
+  { id: 'necker_paris',         name: 'Hôpital Necker-Enfants Malades',             city: 'Paris',       country: 'FR', lat: 48.8486, lon:  2.3201, hri: 88, beds:  800, emergency: true,  type: 'hospital',   specialty: 'Paediatrics' },
+
+  // === ITALIA (ospedali di eccellenza non ancora nel seed IT) ===
+  { id: 'gemelli_rome',         name: 'Policlinico Universitario A. Gemelli',       city: 'Rome',        country: 'IT', lat: 41.9310, lon: 12.4397, hri: 84, beds: 1550, emergency: true,  type: 'university', specialty: 'General & Oncology' },
+  { id: 'san_raffaele_milan',   name: 'Ospedale San Raffaele',                      city: 'Milano',      country: 'IT', lat: 45.5030, lon:  9.2533, hri: 86, beds: 1300, emergency: true,  type: 'university', specialty: 'Neurology & Research' },
+  { id: 'niguarda_milan',       name: 'ASST Grande Ospedale Metropolitano Niguarda',city: 'Milano',      country: 'IT', lat: 45.5120, lon:  9.2023, hri: 83, beds: 1200, emergency: true,  type: 'hospital',   specialty: 'Trauma & General' },
+  { id: 'tor_vergata_rome',     name: 'Policlinico Tor Vergata',                    city: 'Rome',        country: 'IT', lat: 41.8530, lon: 12.6200, hri: 78, beds:  700, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === SPAGNA ===
+  { id: 'clinic_barcelona',     name: 'Hospital Clínic de Barcelona',               city: 'Barcelona',   country: 'ES', lat: 41.3896, lon:  2.1575, hri: 88, beds:  900, emergency: true,  type: 'university', specialty: 'General & Research' },
+  { id: 'vall_hebron',          name: 'Hospital Universitari Vall d\'Hebron',        city: 'Barcelona',   country: 'ES', lat: 41.4240, lon:  2.1620, hri: 85, beds: 1100, emergency: true,  type: 'university', specialty: 'General & Trauma' },
+  { id: 'la_paz_madrid',        name: 'Hospital Universitario La Paz',              city: 'Madrid',      country: 'ES', lat: 40.4776, lon: -3.6904, hri: 84, beds: 1300, emergency: true,  type: 'university', specialty: 'General & Paediatrics' },
+
+  // === AUSTRIA ===
+  { id: 'akh_vienna',           name: 'AKH Wien – Vienna General Hospital',         city: 'Vienna',      country: 'AT', lat: 48.2210, lon: 16.3464, hri: 87, beds: 1700, emergency: true,  type: 'university', specialty: 'General & Research' },
+
+  // === BELGIO ===
+  { id: 'uz_leuven',            name: 'UZ Leuven',                                  city: 'Leuven',      country: 'BE', lat: 50.8780, lon:  4.7005, hri: 88, beds: 1900, emergency: true,  type: 'university', specialty: 'General & Research' },
+  { id: 'brussels_st_luc',      name: 'Cliniques universitaires Saint-Luc',         city: 'Brussels',    country: 'BE', lat: 50.8530, lon:  4.4520, hri: 83, beds:  950, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === PAESI BASSI ===
+  { id: 'erasmus_rotterdam',    name: 'Erasmus MC',                                 city: 'Rotterdam',   country: 'NL', lat: 51.9105, lon:  4.4883, hri: 87, beds: 1200, emergency: true,  type: 'university', specialty: 'General & Oncology' },
+  { id: 'umc_amsterdam',        name: 'Amsterdam UMC',                              city: 'Amsterdam',   country: 'NL', lat: 52.3568, lon:  4.9559, hri: 84, beds: 1500, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === SVEZIA ===
+  { id: 'karolinska_stockholm', name: 'Karolinska Universitetssjukhuset',           city: 'Stockholm',   country: 'SE', lat: 59.3498, lon: 18.0240, hri: 89, beds: 1600, emergency: true,  type: 'university', specialty: 'Research & Oncology' },
+  { id: 'sahlgrenska_goteborg', name: 'Sahlgrenska University Hospital',            city: 'Gothenburg',  country: 'SE', lat: 57.6810, lon: 11.9580, hri: 82, beds: 1700, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === DANIMARCA ===
+  { id: 'rigshospitalet_cph',   name: 'Rigshospitalet Copenhagen',                  city: 'Copenhagen',  country: 'DK', lat: 55.6969, lon: 12.5615, hri: 88, beds: 1300, emergency: true,  type: 'university', specialty: 'Transplant & Trauma' },
+  { id: 'odense_university',    name: 'Odense University Hospital',                 city: 'Odense',      country: 'DK', lat: 55.3959, lon: 10.3883, hri: 80, beds: 1000, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === POLONIA ===
+  { id: 'olsztyn_uni',          name: 'Uniwersytecki Szpital Kliniczny',             city: 'Olsztyn',     country: 'PL', lat: 53.7784, lon: 20.4801, hri: 76, beds:  700, emergency: true,  type: 'university', specialty: 'General' },
+  { id: 'wroclaw_uni',          name: 'Uniwersytecki Szpital Kliniczny',             city: 'Wrocław',     country: 'PL', lat: 51.1157, lon: 17.0594, hri: 78, beds:  800, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === REPUBBLICA CECA ===
+  { id: 'motol_prague',         name: 'University Hospital Motol',                  city: 'Prague',      country: 'CZ', lat: 50.0748, lon: 14.3458, hri: 82, beds: 2200, emergency: true,  type: 'university', specialty: 'Paediatrics & General' },
+  { id: 'vfn_prague',           name: 'General University Hospital Prague',         city: 'Prague',      country: 'CZ', lat: 50.0755, lon: 14.4265, hri: 80, beds: 1300, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === UNGHERIA ===
+  { id: 'semmelweis_budapest',  name: 'Semmelweis University Hospital',             city: 'Budapest',    country: 'HU', lat: 47.4890, lon: 19.0620, hri: 79, beds: 1000, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === FINLANDIA ===
+  { id: 'helsinki_uni_hosp',    name: 'HUS Helsinki University Hospital',           city: 'Helsinki',    country: 'FI', lat: 60.1870, lon: 24.9220, hri: 86, beds: 1600, emergency: true,  type: 'university', specialty: 'General' },
+  { id: 'tampere_uni_hosp',     name: 'Tampere University Hospital',                city: 'Tampere',     country: 'FI', lat: 61.4930, lon: 23.7740, hri: 80, beds:  700, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === NORVEGIA ===
+  { id: 'oslo_uni_hospital',    name: 'Oslo University Hospital',                   city: 'Oslo',        country: 'NO', lat: 59.9275, lon: 10.7240, hri: 85, beds: 1900, emergency: true,  type: 'university', specialty: 'General & Trauma' },
+  { id: 'bergen_hospital',      name: 'Haukeland University Hospital',              city: 'Bergen',      country: 'NO', lat: 60.3720, lon:  5.3510, hri: 82, beds: 1000, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === PORTOGALLO ===
+  { id: 'lisbon_santa_maria',   name: 'Hospital de Santa Maria',                    city: 'Lisbon',      country: 'PT', lat: 38.7527, lon: -9.1604, hri: 79, beds: 1100, emergency: true,  type: 'university', specialty: 'General' },
+  { id: 'porto_sao_joao',       name: 'Centro Hospitalar São João',                 city: 'Porto',       country: 'PT', lat: 41.1803, lon: -8.6040, hri: 80, beds: 1000, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === GRECIA ===
+  { id: 'athens_evangelismos',  name: 'Evangelismos General Hospital',              city: 'Athens',      country: 'GR', lat: 37.9795, lon: 23.7485, hri: 77, beds:  950, emergency: true,  type: 'hospital',   specialty: 'General' },
+  { id: 'thessaloniki_axiou',   name: 'AXEPA University Hospital',                  city: 'Thessaloniki',country: 'GR', lat: 40.6130, lon: 22.9597, hri: 75, beds:  800, emergency: true,  type: 'university', specialty: 'General' },
+
+  // === IRLANDA ===
+  { id: 'dublin_st_james',      name: 'St James\'s Hospital',                       city: 'Dublin',      country: 'IE', lat: 53.3379, lon: -6.2931, hri: 82, beds: 1000, emergency: true,  type: 'hospital',   specialty: 'General & Oncology' },
+  { id: 'beaumont_dublin',      name: 'Beaumont Hospital',                          city: 'Dublin',      country: 'IE', lat: 53.3890, lon: -6.2200, hri: 80, beds:  800, emergency: true,  type: 'hospital',   specialty: 'Neurosurgery' },
+
+  // === ROMANIA ===
+  { id: 'romania_fundeni',      name: 'Fundeni Clinical Institute',                 city: 'Bucharest',   country: 'RO', lat: 44.4540, lon: 26.1540, hri: 78, beds: 1000, emergency: false, type: 'hospital',   specialty: 'Oncology & Transplant' },
+
+  // === BULGARIA ===
+  { id: 'sofia_pirogov',        name: 'N.I. Pirogov Emergency Hospital',            city: 'Sofia',       country: 'BG', lat: 42.6880, lon: 23.3050, hri: 75, beds:  800, emergency: true,  type: 'hospital',   specialty: 'Emergency & Trauma' },
+];
