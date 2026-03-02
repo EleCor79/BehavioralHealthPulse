@@ -33,6 +33,9 @@ import type {
   MapDatacenterCluster,
   CyberThreat,
   CableHealthRecord,
+  Hospital,
+  WhoOutbreak,
+  VaccinationCoverage,
 } from '@/types';
 import type { AirportDelayAlert } from '@/services/aviation';
 import type { DisplacementFlow } from '@/services/displacement';
@@ -272,6 +275,10 @@ export class DeckGLMap {
   private militaryVesselClusters: MilitaryVesselCluster[] = [];
   private naturalEvents: NaturalEvent[] = [];
   private firmsFireData: Array<{ lat: number; lon: number; brightness: number; frp: number; confidence: number; region: string; acq_date: string; daynight: string }> = [];
+  // Health variant data stores
+  private hospitals: Hospital[] = [];
+  private whoOutbreaks: WhoOutbreak[] = [];
+  private vaccinationCoverage: VaccinationCoverage[] = [];
   private techEvents: TechEventMarker[] = [];
   private flightDelays: AirportDelayAlert[] = [];
   private news: NewsItem[] = [];
@@ -1028,6 +1035,17 @@ export class DeckGLMap {
       layers.push(this.createWeatherLayer(filteredWeatherAlerts));
     }
 
+    // Health variant layers
+    if (mapLayers.hospitals && this.hospitals.length > 0) {
+      layers.push(this.createHospitalsLayer());
+    }
+    if (mapLayers.whoOutbreaks && this.whoOutbreaks.length > 0) {
+      layers.push(this.createWhoOutbreaksLayer());
+    }
+    if (mapLayers.vaccinationCoverage && this.vaccinationCoverage.length > 0) {
+      layers.push(this.createVaccinationLayer());
+    }
+
     // Internet outages layer + ghost for easier picking
     if (mapLayers.outages && filteredOutages.length > 0) {
       layers.push(this.createOutagesLayer(filteredOutages));
@@ -1571,6 +1589,62 @@ export class DeckGLMap {
       },
       radiusMinPixels: 8,
       radiusMaxPixels: 20,
+      pickable: true,
+    });
+  }
+
+  // ── Health variant layer renderers ────────────────────────────────────────
+
+  private createHospitalsLayer(): ScatterplotLayer {
+    return new ScatterplotLayer<Hospital>({
+      id: 'hospitals-layer',
+      data: this.hospitals,
+      getPosition: (d) => [d.lon, d.lat],
+      getRadius: (d) => d.beds && d.beds > 200 ? 6000 : 3500,
+      getFillColor: (d) => d.emergency
+        ? [77, 217, 172, 220]   // verde speranza — pronto soccorso
+        : [64, 196, 255, 180],  // azzurro SSN — struttura ordinaria
+      getLineColor: [255, 255, 255, 80],
+      stroked: true,
+      lineWidthMinPixels: 1,
+      radiusMinPixels: 4,
+      radiusMaxPixels: 14,
+      pickable: true,
+    });
+  }
+
+  private createWhoOutbreaksLayer(): ScatterplotLayer {
+    return new ScatterplotLayer<WhoOutbreak>({
+      id: 'who-outbreaks-layer',
+      data: this.whoOutbreaks,
+      getPosition: (d) => [d.lon, d.lat],
+      getRadius: 35000,
+      getFillColor: (d) => {
+        if (d.status === 'active') return [255, 82, 82, 220];    // rosso — attivo
+        if (d.status === 'monitoring') return [255, 171, 64, 190]; // arancio — sorveglianza
+        return [255, 241, 118, 160];                               // giallo — contenuto
+      },
+      radiusMinPixels: 8,
+      radiusMaxPixels: 24,
+      pickable: true,
+    });
+  }
+
+  private createVaccinationLayer(): ScatterplotLayer {
+    return new ScatterplotLayer<VaccinationCoverage>({
+      id: 'vaccination-layer',
+      data: this.vaccinationCoverage,
+      getPosition: (d) => [d.lon, d.lat],
+      getRadius: 80000,
+      getFillColor: (d) => {
+        // Verde intenso = alta copertura, rosso = bassa copertura
+        const pct = d.coverage / 100;
+        const r = Math.round(255 * (1 - pct));
+        const g = Math.round(200 * pct + 55);
+        return [r, g, 80, 160] as [number, number, number, number];
+      },
+      radiusMinPixels: 10,
+      radiusMaxPixels: 30,
       pickable: true,
     });
   }
@@ -3043,6 +3117,17 @@ export class DeckGLMap {
           { key: 'speciesRecovery', label: 'Species Recovery', icon: '&#128062;' },
           { key: 'renewableInstallations', label: 'Clean Energy', icon: '&#9889;' },
         ]
+      : SITE_VARIANT === 'health'
+      ? [
+          { key: 'natural', label: 'Terremoti & Natura', icon: '&#127755;' },
+          { key: 'weather', label: 'Allerte Meteo', icon: '&#9928;' },
+          { key: 'fires', label: 'Incendi', icon: '&#128293;' },
+          { key: 'displacement', label: 'Sfollamento', icon: '&#128101;' },
+          { key: 'climate', label: 'Anomalie Clima', icon: '&#127787;' },
+          { key: 'hospitals', label: 'Ospedali & Strutture', icon: '&#127973;' },
+          { key: 'whoOutbreaks', label: 'Focolai WHO', icon: '&#129440;' },
+          { key: 'vaccinationCoverage', label: 'Copertura Vaccinale', icon: '&#128137;' },
+        ]
       : [
         { key: 'hotspots', label: t('components.deckgl.layers.intelHotspots'), icon: '&#127919;' },
         { key: 'conflicts', label: t('components.deckgl.layers.conflictZones'), icon: '&#9876;' },
@@ -3292,10 +3377,19 @@ export class DeckGLMap {
       triangle: (color: string) => `<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,1 11,10 1,10" fill="${color}"/></svg>`,
       square: (color: string) => `<svg width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx="1" fill="${color}"/></svg>`,
       hexagon: (color: string) => `<svg width="12" height="12" viewBox="0 0 12 12"><polygon points="6,1 10.5,3.5 10.5,8.5 6,11 1.5,8.5 1.5,3.5" fill="${color}"/></svg>`,
+      // Croce medica — usata per ospedali nel variant health
+      cross: (color: string) => `<svg width="12" height="12" viewBox="0 0 12 12"><rect x="4" y="1" width="4" height="10" rx="1" fill="${color}"/><rect x="1" y="4" width="10" height="4" rx="1" fill="${color}"/></svg>`,
     };
 
     const isLight = getCurrentTheme() === 'light';
-    const legendItems = SITE_VARIANT === 'tech'
+    const legendItems = SITE_VARIANT === 'health'
+      ? [
+          { shape: shapes.cross('rgb(77, 217, 172)'),  label: t('components.deckgl.legend.hospitalPS') },   // PS / A&E
+          { shape: shapes.cross('rgb(64, 196, 255)'),  label: t('components.deckgl.legend.hospitalOrd') },  // Ospedale
+          { shape: shapes.circle('rgb(255, 82, 82)'),  label: t('components.deckgl.legend.outbreakActive') }, // Focolaio
+          { shape: shapes.circle('rgb(255, 171, 64)'), label: t('components.deckgl.legend.outbreakMonitor') }, // Sorveglianza
+        ]
+      : SITE_VARIANT === 'tech'
       ? [
           { shape: shapes.circle(isLight ? 'rgb(22, 163, 74)' : 'rgb(0, 255, 150)'), label: t('components.deckgl.legend.startupHub') },
           { shape: shapes.circle('rgb(100, 200, 255)'), label: t('components.deckgl.legend.techHQ') },
@@ -3666,6 +3760,22 @@ export class DeckGLMap {
 
   public setClimateAnomalies(anomalies: ClimateAnomaly[]): void {
     this.climateAnomalies = anomalies;
+    this.render();
+  }
+
+  // Health variant setters
+  public setHospitals(hospitals: Hospital[]): void {
+    this.hospitals = hospitals;
+    this.render();
+  }
+
+  public setWhoOutbreaks(outbreaks: WhoOutbreak[]): void {
+    this.whoOutbreaks = outbreaks;
+    this.render();
+  }
+
+  public setVaccinationCoverage(coverage: VaccinationCoverage[]): void {
+    this.vaccinationCoverage = coverage;
     this.render();
   }
 

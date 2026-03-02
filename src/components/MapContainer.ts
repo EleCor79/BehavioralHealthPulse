@@ -25,6 +25,9 @@ import type {
   UcdpGeoEvent,
   CyberThreat,
   CableHealthRecord,
+  Hospital,
+  WhoOutbreak,
+  VaccinationCoverage,
 } from '@/types';
 import type { AirportDelayAlert } from '@/services/aviation';
 import type { DisplacementFlow } from '@/services/displacement';
@@ -319,6 +322,25 @@ export class MapContainer {
   public setClimateAnomalies(anomalies: ClimateAnomaly[]): void {
     if (this.useDeckGL) {
       this.deckGLMap?.setClimateAnomalies(anomalies);
+    }
+  }
+
+  // Health variant setters (DeckGL only — SVG fallback shows nothing for these)
+  public setHospitals(hospitals: Hospital[]): void {
+    if (this.useDeckGL) {
+      this.deckGLMap?.setHospitals(hospitals);
+    }
+  }
+
+  public setWhoOutbreaks(outbreaks: WhoOutbreak[]): void {
+    if (this.useDeckGL) {
+      this.deckGLMap?.setWhoOutbreaks(outbreaks);
+    }
+  }
+
+  public setVaccinationCoverage(coverage: VaccinationCoverage[]): void {
+    if (this.useDeckGL) {
+      this.deckGLMap?.setVaccinationCoverage(coverage);
     }
   }
 

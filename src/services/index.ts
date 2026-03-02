@@ -39,3 +39,7 @@ export { generateSummary, translateText } from './summarization';
 export * from './cached-theater-posture';
 export * from './trade';
 export * from './supply-chain';
+// Health variant services
+export * from './hospitals';
+export * from './who-outbreaks';
+export * from './vaccination-coverage';

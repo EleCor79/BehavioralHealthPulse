@@ -126,6 +126,9 @@ const layers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 await initI18n();

@@ -177,6 +177,9 @@ const allLayersEnabled: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: true,
+  hospitals: true,
+  whoOutbreaks: true,
+  vaccinationCoverage: true,
 };
 
 const allLayersDisabled: MapLayers = {
@@ -221,6 +224,9 @@ const allLayersDisabled: MapLayers = {
   speciesRecovery: false,
   renewableInstallations: false,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 const SEEDED_NEWS_LOCATIONS: Array<{

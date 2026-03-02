@@ -1275,6 +1275,19 @@ export default defineConfig({
           });
         },
       },
+      // Overpass API (OpenStreetMap) — ospedali e strutture sanitarie
+      '/api/overpass': {
+        target: 'https://overpass-api.de/api',
+        changeOrigin: true,
+        secure: true,
+        timeout: 50000,
+        rewrite: (path) => path.replace(/^\/api\/overpass/, ''),
+        configure: (proxy) => {
+          proxy.on('error', (err) => {
+            console.log('Overpass proxy error:', err.message);
+          });
+        },
+      },
     },
   },
 });

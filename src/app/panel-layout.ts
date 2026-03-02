@@ -321,7 +321,7 @@ export class PanelLayoutManager implements AppModule {
     this.ctx.map = new MapContainer(mapContainer, {
       zoom: this.ctx.isMobile ? 2.5 : 1.0,
       pan: { x: 0, y: 0 },
-      view: this.ctx.isMobile ? 'mena' : 'global',
+      view: SITE_VARIANT === 'health' ? 'eu' : (this.ctx.isMobile ? 'mena' : 'global'),
       layers: this.ctx.mapLayers,
       timeRange: '7d',
     });
@@ -690,6 +690,18 @@ export class PanelLayoutManager implements AppModule {
 
     this.applyPanelSettings();
     this.applyInitialUrlState();
+
+    // For the health variant, center the map on Italy after initial setup
+    // (only if no URL state overrides the view)
+    if (SITE_VARIANT === 'health' && this.ctx.map && !this.ctx.initialUrlState?.view) {
+      this.ctx.map.setView('eu');
+      // Short delay to allow the map to initialize before centering on Italy
+      setTimeout(() => {
+        this.ctx.map?.setCenter(41.9, 12.5, 5);
+        const regionSelect = document.getElementById('regionSelect') as HTMLSelectElement;
+        if (regionSelect) regionSelect.value = 'eu';
+      }, 400);
+    }
   }
 
   private applyTimeRangeFilterToNewsPanels(): void {

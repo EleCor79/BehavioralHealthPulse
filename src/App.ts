@@ -86,6 +86,20 @@ export class App {
         const unhappyLayers: (keyof MapLayers)[] = ['conflicts', 'bases', 'hotspots', 'nuclear', 'irradiators', 'sanctions', 'military', 'protests', 'pipelines', 'waterways', 'ais', 'flights', 'spaceports', 'minerals', 'natural', 'fires', 'outages', 'cyberThreats', 'weather', 'economic', 'cables', 'datacenters', 'ucdpEvents', 'displacement', 'climate'];
         unhappyLayers.forEach(layer => { mapLayers[layer] = false; });
       }
+      // Health variant: force all non-health layers off — military/geopolitical layers must never appear
+      if (currentVariant === 'health') {
+        const nonHealthLayers: (keyof MapLayers)[] = [
+          'conflicts', 'bases', 'hotspots', 'nuclear', 'irradiators', 'sanctions',
+          'military', 'protests', 'pipelines', 'waterways', 'ais', 'flights',
+          'spaceports', 'minerals', 'outages', 'cyberThreats', 'economic',
+          'cables', 'datacenters', 'ucdpEvents',
+          'startupHubs', 'cloudRegions', 'accelerators', 'techHQs', 'techEvents',
+          'stockExchanges', 'financialCenters', 'centralBanks', 'commodityHubs', 'gulfInvestments',
+          'positiveEvents', 'kindness', 'happiness', 'speciesRecovery', 'renewableInstallations',
+          'tradeRoutes',
+        ];
+        nonHealthLayers.forEach(layer => { mapLayers[layer] = false; });
+      }
       panelSettings = loadFromStorage<Record<string, PanelConfig>>(
         STORAGE_KEYS.panels,
         DEFAULT_PANELS

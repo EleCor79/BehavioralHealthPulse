@@ -531,6 +531,10 @@ export interface MapLayers {
   renewableInstallations: boolean;
   // Trade route layers
   tradeRoutes: boolean;
+  // Health variant layers
+  hospitals: boolean;
+  whoOutbreaks: boolean;
+  vaccinationCoverage: boolean;
 }
 
 export interface AIDataCenter {
@@ -929,6 +933,45 @@ export interface NaturalEvent {
   sourceUrl?: string;
   sourceName?: string;
   closed: boolean;
+}
+
+// ─── Health Variant Layer Types ────────────────────────────────────────────
+
+export interface Hospital {
+  id: string;
+  name: string;
+  lat: number;
+  lon: number;
+  country: string;
+  city?: string;
+  beds?: number;
+  emergency: boolean;
+  type: 'hospital' | 'clinic' | 'health_centre' | 'university';
+}
+
+export interface WhoOutbreak {
+  id: string;
+  disease: string;
+  country: string;
+  countryCode: string;
+  lat: number;
+  lon: number;
+  date: Date;
+  caseCount?: number;
+  deaths?: number;
+  status: 'active' | 'contained' | 'monitoring';
+  sourceUrl: string;
+  headline: string;
+}
+
+export interface VaccinationCoverage {
+  countryCode: string;
+  country: string;
+  lat: number;
+  lon: number;
+  coverage: number; // 0–100 percentage
+  vaccine: string;  // e.g. "DTP3", "MCV2", "PCV3"
+  year: number;
 }
 
 // Infrastructure Cascade Types

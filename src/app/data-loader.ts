@@ -12,6 +12,7 @@ import {
   LAYER_TO_SOURCE,
 } from '@/config';
 import { INTEL_HOTSPOTS, CONFLICT_ZONES } from '@/config/geo';
+import { STATIC_HOSPITALS_IT } from '@/config/hospitals-static';
 import {
   fetchCategoryFeeds,
   getFeedFailures,
@@ -43,6 +44,9 @@ import {
   fetchPizzIntStatus,
   fetchGdeltTensions,
   fetchNaturalEvents,
+  fetchHospitals,
+  fetchWhoOutbreaks,
+  fetchVaccinationCoverage,
   fetchRecentAwards,
   fetchOilAnalytics,
   fetchBisData,
@@ -144,6 +148,14 @@ export class DataLoaderManager implements AppModule {
   }
 
   async loadAllData(): Promise<void> {
+    // Health variant: inietta subito gli ospedali statici come seed visivo immediato
+    // Overpass li sovrascriverà con dati OSM completi quando disponibile
+    if (SITE_VARIANT === 'health' && this.ctx.mapLayers.hospitals) {
+      this.ctx.map?.setHospitals(STATIC_HOSPITALS_IT);
+      this.ctx.map?.setLayerReady('hospitals', true);
+      console.log(`[Health] Seeded ${STATIC_HOSPITALS_IT.length} static hospitals immediately`);
+    }
+
     const runGuarded = async (name: string, fn: () => Promise<void>): Promise<void> => {
       if (this.ctx.isDestroyed || this.ctx.inFlight.has(name)) return;
       this.ctx.inFlight.add(name);
@@ -238,6 +250,13 @@ export class DataLoaderManager implements AppModule {
 
     if (SITE_VARIANT === 'tech') {
       tasks.push({ name: 'techReadiness', task: runGuarded('techReadiness', () => (this.ctx.panels['tech-readiness'] as TechReadinessPanel)?.refresh()) });
+    }
+
+    // Health variant loaders — caricati solo se il layer è attivo
+    if (SITE_VARIANT === 'health') {
+      if (this.ctx.mapLayers.hospitals) tasks.push({ name: 'hospitals', task: runGuarded('hospitals', () => this.loadHospitals()) });
+      if (this.ctx.mapLayers.whoOutbreaks) tasks.push({ name: 'whoOutbreaks', task: runGuarded('whoOutbreaks', () => this.loadWhoOutbreaks()) });
+      if (this.ctx.mapLayers.vaccinationCoverage) tasks.push({ name: 'vaccinationCoverage', task: runGuarded('vaccinationCoverage', () => this.loadVaccinationCoverage()) });
     }
 
     const results = await Promise.allSettled(tasks.map(t => t.task));
@@ -837,6 +856,50 @@ export class DataLoaderManager implements AppModule {
       this.ctx.map?.setLayerReady('weather', false);
       this.ctx.statusPanel?.updateFeed('Weather', { status: 'error' });
       dataFreshness.recordError('weather', String(error));
+    }
+  }
+
+  // ── Health variant data loaders ────────────────────────────────────────────
+
+  async loadHospitals(): Promise<void> {
+    try {
+      const hospitals = await fetchHospitals();
+      this.ctx.map?.setHospitals(hospitals);
+      this.ctx.map?.setLayerReady('hospitals', hospitals.length > 0);
+      this.ctx.statusPanel?.updateFeed('Ospedali OSM', { status: 'ok', itemCount: hospitals.length });
+      dataFreshness.recordUpdate('hospitals' as DataSourceId, hospitals.length);
+    } catch (error) {
+      this.ctx.map?.setLayerReady('hospitals', false);
+      this.ctx.statusPanel?.updateFeed('Ospedali OSM', { status: 'error' });
+      dataFreshness.recordError('hospitals' as DataSourceId, String(error));
+    }
+  }
+
+  async loadWhoOutbreaks(): Promise<void> {
+    try {
+      const outbreaks = await fetchWhoOutbreaks();
+      this.ctx.map?.setWhoOutbreaks(outbreaks);
+      this.ctx.map?.setLayerReady('whoOutbreaks', outbreaks.length > 0);
+      this.ctx.statusPanel?.updateFeed('WHO Outbreaks', { status: 'ok', itemCount: outbreaks.length });
+      dataFreshness.recordUpdate('who-outbreaks' as DataSourceId, outbreaks.length);
+    } catch (error) {
+      this.ctx.map?.setLayerReady('whoOutbreaks', false);
+      this.ctx.statusPanel?.updateFeed('WHO Outbreaks', { status: 'error' });
+      dataFreshness.recordError('who-outbreaks' as DataSourceId, String(error));
+    }
+  }
+
+  async loadVaccinationCoverage(): Promise<void> {
+    try {
+      const coverage = await fetchVaccinationCoverage();
+      this.ctx.map?.setVaccinationCoverage(coverage);
+      this.ctx.map?.setLayerReady('vaccinationCoverage', coverage.length > 0);
+      this.ctx.statusPanel?.updateFeed('ECDC Vaccini', { status: 'ok', itemCount: coverage.length });
+      dataFreshness.recordUpdate('ecdc-vaccination' as DataSourceId, coverage.length);
+    } catch (error) {
+      this.ctx.map?.setLayerReady('vaccinationCoverage', false);
+      this.ctx.statusPanel?.updateFeed('ECDC Vaccini', { status: 'error' });
+      dataFreshness.recordError('ecdc-vaccination' as DataSourceId, String(error));
     }
   }
 

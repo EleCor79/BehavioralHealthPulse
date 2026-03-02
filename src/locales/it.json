@@ -609,7 +609,14 @@
         "elevated": "Elevato",
         "monitoring": "Monitoraggio",
         "base": "Base",
-        "nuclear": "Nucleare"
+        "nuclear": "Nucleare",
+        "hospitalPS": "P.Soccorso",
+        "hospitalOrd": "Ospedale",
+        "outbreakActive": "Focolaio",
+        "outbreakMonitor": "Sorveglianza",
+        "outbreakContained": "Contenuto",
+        "vaccinHigh": "Copertura alta",
+        "vaccinLow": "Copertura bassa"
       },
       "timeAll": "Tutto",
       "layers": {
@@ -638,6 +645,9 @@
         "ucdpEvents": "Eventi UCDP",
         "displacementFlows": "Flussi di sfollamento",
         "climateAnomalies": "Anomalie climatiche",
+        "hospitals": "Ospedali & Strutture",
+        "whoOutbreaks": "Focolai WHO",
+        "vaccinationCoverage": "Copertura Vaccinale",
         "weatherAlerts": "Allerte meteo",
         "strategicWaterways": "Vie d’acqua strategiche",
         "economicCenters": "Centri economici",

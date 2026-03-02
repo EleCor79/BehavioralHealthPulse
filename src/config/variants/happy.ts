@@ -65,6 +65,9 @@ export const DEFAULT_MAP_LAYERS: MapLayers = {
   speciesRecovery: true,
   renewableInstallations: true,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 // Mobile defaults — same as desktop for happy variant
@@ -114,6 +117,9 @@ export const MOBILE_DEFAULT_MAP_LAYERS: MapLayers = {
   speciesRecovery: true,
   renewableInstallations: true,
   tradeRoutes: false,
+  hospitals: false,
+  whoOutbreaks: false,
+  vaccinationCoverage: false,
 };
 
 export const VARIANT_CONFIG: VariantConfig = {

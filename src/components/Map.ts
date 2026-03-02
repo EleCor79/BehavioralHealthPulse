@@ -360,6 +360,9 @@ export class MapComponent {
       'fires',                                            // incendi (rischio salute pubblica)
       'displacement',                                     // flussi migratori/sfollamento (sanità pubblica)
       'climate',                                          // anomalie climatiche (salute ambientale)
+      'hospitals',                                        // ospedali & strutture sanitarie (OSM)
+      'whoOutbreaks',                                     // focolai malattie infettive (WHO)
+      'vaccinationCoverage',                              // copertura vaccinale EU (ECDC)
     ];
     const layers = SITE_VARIANT === 'health' ? healthLayers : SITE_VARIANT === 'tech' ? techLayers : SITE_VARIANT === 'finance' ? financeLayers : SITE_VARIANT === 'happy' ? happyLayers : fullLayers;
     const layerLabelKeys: Partial<Record<keyof MapLayers, string>> = {
@@ -392,6 +395,9 @@ export class MapComponent {
       fires: 'components.deckgl.layers.fires',
       displacement: 'components.deckgl.layers.displacementFlows',
       climate: 'components.deckgl.layers.climateAnomalies',
+      hospitals: 'components.deckgl.layers.hospitals',
+      whoOutbreaks: 'components.deckgl.layers.whoOutbreaks',
+      vaccinationCoverage: 'components.deckgl.layers.vaccinationCoverage',
     };
     const getLayerLabel = (layer: keyof MapLayers): string => {
       if (layer === 'sanctions') return t('components.deckgl.layerHelp.labels.sanctions');
