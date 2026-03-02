@@ -173,6 +173,44 @@
 }
 
 /* ==========================================================
+   Health Grid Layout — 5 colonne uniformi, altezza espandibile
+   ========================================================== */
+
+[data-variant="health"] .panels-grid {
+  /* 5 colonne fisse: live-news più larga (2 col), le altre 1 col ciascuna */
+  grid-template-columns: repeat(5, 1fr);
+  /* Altezza riga: min 320px, max adattabile al contenuto */
+  grid-auto-rows: minmax(320px, auto);
+  gap: 4px;
+}
+
+/* Live News (video embed) occupa 2 colonne per avere spazio al player */
+[data-variant="health"] .panels-grid [data-panel="live-news"] {
+  grid-column: span 2;
+}
+
+/* Mobile: 1 colonna, tutto stacked */
+@media (max-width: 900px) {
+  [data-variant="health"] .panels-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(280px, auto);
+  }
+  [data-variant="health"] .panels-grid [data-panel="live-news"] {
+    grid-column: span 1;
+  }
+}
+
+/* Tablet: 2 colonne */
+@media (min-width: 901px) and (max-width: 1280px) {
+  [data-variant="health"] .panels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  [data-variant="health"] .panels-grid [data-panel="live-news"] {
+    grid-column: span 2;
+  }
+}
+
+/* ==========================================================
    Health Panel Chrome — Pulito, professionale, istituzionale
    ========================================================== */
 
