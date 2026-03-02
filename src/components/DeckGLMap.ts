@@ -2790,6 +2790,45 @@ export class DeckGLMap {
           </div>`,
         };
       }
+      case 'hospitals-layer': {
+        const h = obj as Hospital;
+        const emergencyLabel = h.emergency ? '🚨 Pronto Soccorso' : '🏥 Ospedale';
+        const bedsInfo = h.beds ? `<br/>🛏 ${h.beds.toLocaleString()} posti letto` : '';
+        const specialtyInfo = h.specialty ? `<br/>🔬 ${text(h.specialty)}` : '';
+        const hriInfo = h.hri != null ? `<br/>HRI: ${h.hri}/100` : '';
+        const cityCountry = [h.city, h.country].filter(Boolean).join(', ');
+        return {
+          html: `<div class="deckgl-tooltip">
+            <strong>${text(h.name)}</strong><br/>
+            <span style="opacity:.8">${emergencyLabel}</span><br/>
+            <span style="opacity:.7">${text(cityCountry)}</span>${bedsInfo}${specialtyInfo}${hriInfo}
+          </div>`,
+        };
+      }
+      case 'who-outbreaks-layer': {
+        const o = obj as WhoOutbreak;
+        const statusLabel = o.status === 'active' ? '🔴 Attivo' : o.status === 'monitoring' ? '🟠 Sorveglianza' : '🟡 Contenuto';
+        const casesInfo = o.caseCount != null ? `<br/>Casi: ${o.caseCount.toLocaleString()}` : '';
+        const deathsInfo = o.deaths != null ? ` · Decessi: ${o.deaths.toLocaleString()}` : '';
+        return {
+          html: `<div class="deckgl-tooltip">
+            <strong>🦠 ${text(o.disease)}</strong><br/>
+            ${statusLabel}<br/>
+            <span style="opacity:.8">${text(o.country)}</span>${casesInfo}${deathsInfo}
+          </div>`,
+        };
+      }
+      case 'vaccination-layer': {
+        const v = obj as VaccinationCoverage;
+        return {
+          html: `<div class="deckgl-tooltip">
+            <strong>💉 ${text(v.vaccine)}</strong><br/>
+            ${text(v.country)}<br/>
+            Copertura: <strong>${v.coverage.toFixed(1)}%</strong><br/>
+            <span style="opacity:.7">Anno: ${v.year}</span>
+          </div>`,
+        };
+      }
       default:
         return null;
     }
