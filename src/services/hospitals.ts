@@ -5,7 +5,10 @@
  */
 import { createCircuitBreaker } from '@/utils';
 import type { Hospital } from '@/types';
-import { STATIC_HOSPITALS_IT } from '@/config/hospitals-static';
+import { STATIC_HOSPITALS_IT, STATIC_HOSPITALS_EU } from '@/config/hospitals-static';
+
+// Merge statico completo: IT + EU — usato come seed e come fallback
+const STATIC_ALL = [...STATIC_HOSPITALS_IT, ...STATIC_HOSPITALS_EU];
 
 // In dev usa il proxy locale (/api/overpass), in prod chiama Overpass direttamente
 const OVERPASS_API = import.meta.env.DEV
@@ -93,18 +96,19 @@ function parseElement(el: OverpassElement): Hospital | null {
  */
 function mergeWithStatic(osmHospitals: Hospital[]): Hospital[] {
   if (osmHospitals.length === 0) {
-    console.log('[Hospitals] Overpass returned 0, using static seed data');
-    return STATIC_HOSPITALS_IT;
+    console.log('[Hospitals] Overpass returned 0, using full static seed (IT + EU)');
+    return STATIC_ALL;
   }
 
   // Build set of static entries not already covered by OSM (proximity 0.005° ≈ 500m)
-  const staticOnly = STATIC_HOSPITALS_IT.filter(s =>
+  // OSM copre solo bbox Italia — gli ospedali EU dello static vengono sempre preservati
+  const staticOnly = STATIC_ALL.filter(s =>
     !osmHospitals.some(o =>
       Math.abs(o.lat - s.lat) < 0.005 && Math.abs(o.lon - s.lon) < 0.005
     )
   );
 
-  console.log(`[Hospitals] OSM: ${osmHospitals.length}, static supplement: ${staticOnly.length}`);
+  console.log(`[Hospitals] OSM: ${osmHospitals.length}, static supplement (IT+EU): ${staticOnly.length}`);
   return [...osmHospitals, ...staticOnly];
 }
 
@@ -136,7 +140,7 @@ export async function fetchHospitals(): Promise<Hospital[]> {
     } finally {
       clearTimeout(timeoutId);
     }
-  }, STATIC_HOSPITALS_IT); // <-- fallback = dati statici, non []
+  }, STATIC_ALL); // <-- fallback = IT + EU static, non []
 
   return result;
 }
